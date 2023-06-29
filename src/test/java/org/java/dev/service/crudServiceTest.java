@@ -76,8 +76,9 @@ class crudServiceTest {
     void planetCrudServiceCreateDelete() {
 
         String planetID = "TESTCREATEDELETE";
-        PlanetDto planetDto = PlanetDto.of(planetID, planetID);
+        PlanetDto planetDto = PlanetDto.of(planetID, "CapEx 999");//planetID);
         PlanetEntity planetEntity = PlanetDtoMapper.instance().map(planetDto);
+        System.out.println(" ===>>> planetDto = " + planetDto);
         planetCrudService.create(planetEntity);
         List<PlanetEntity> planetEntityExpected = planetCrudService.findAll();
         int expected = planetEntityExpected.size() - 1;
@@ -88,6 +89,23 @@ class crudServiceTest {
     }
 
     @Test
+    void planetCrudServiceInsert() {
+        PlanetEntity planetEntity = new PlanetEntity();
+        planetEntity.setId("UUWWWYRRTT");
+        planetEntity.setName("URIU");
+        planetCrudService.create(planetEntity);
+        }
+    @Test
+    void planetCrudServiceDelete() {
+
+        planetCrudService.delete("UUU");
+
+
+
+    }
+
+
+    @Test
     void planetCrudServiceUpdate() {
         String expected = "Venus " + LocalDateTime.now();
         PlanetDto planetDto = PlanetDto.of("VENUS", expected);
@@ -96,6 +114,4 @@ class crudServiceTest {
         String actual = planetCrudService.getById("VENUS").getName();
         Assertions.assertEquals(expected, actual);
     }
-
-
 }

@@ -2,7 +2,7 @@ package org.java.dev.service;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.MutationQuery;
+import org.hibernate.query.NativeQuery;
 import org.java.dev.configuration.hibernate.Datasource;
 import org.java.dev.entity.ClientEntity;
 
@@ -46,9 +46,9 @@ public class ClientCrudService {
         Session session = datasource.openSession();
         Transaction transaction = session.beginTransaction();
         String queryString = "delete from ClientEntity c where c.id=:id";
-        MutationQuery mutationQuery = session.createMutationQuery(queryString);
-        mutationQuery.setParameter("id", id);
-        int rowCount = mutationQuery.executeUpdate();
+        NativeQuery nativeQuery = session.createNativeQuery(queryString);
+        nativeQuery.setParameter("id", id);
+        int rowCount = nativeQuery.executeUpdate();
         transaction.commit();
         session.close();
         return rowCount;

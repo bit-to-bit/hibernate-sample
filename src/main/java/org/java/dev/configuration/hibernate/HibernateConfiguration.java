@@ -6,6 +6,11 @@ import org.java.dev.configuration.AppProperties;
 import org.java.dev.entity.ClientEntity;
 import org.java.dev.entity.PlanetEntity;
 import org.java.dev.util.Constant;
+
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 @Slf4j
 public class HibernateConfiguration {
     private HibernateConfiguration() {
@@ -20,9 +25,10 @@ public class HibernateConfiguration {
         configuration.setProperty(AvailableSettings.USER, app.getProperty(Constant.HIBERNATE_CONNECTION_USERNAME));
         configuration.setProperty(AvailableSettings.PASS, app.getProperty(Constant.HIBERNATE_CONNECTION_PASSWORD));
         configuration.setProperty(AvailableSettings.DEFAULT_SCHEMA,app.getProperty(Constant.HIBERNATE_DEFAULT_SCHEMA));
+        //configuration.setProperty(AvailableSettings.JAKARTA_VALIDATION_MODE,app.getProperty(Constant.HIBERNATE_JAKARTA_VALIDATION_MODE));
+        //configuration.setProperty(AvailableSettings.JAKARTA_VALIDATION_FACTORY, "org.hibernate.validator.HibernateValidator");//""org.hibernate.validator.HibernateValidator");
         configuration.addAnnotatedClass(ClientEntity.class);
         configuration.addAnnotatedClass(PlanetEntity.class);
-
         return configuration;
     }
 }

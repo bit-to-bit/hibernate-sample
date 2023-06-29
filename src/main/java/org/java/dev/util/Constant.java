@@ -26,4 +26,5 @@ public final class Constant {
     public static final String HIBERNATE_ENTITY_PACKAGE = "hibernate.entity.package";
     public static final String HIBERNATE_DEFAULT_SCHEMA = "hibernate.default_schema";
     public static final String HIBERNATE_DIALECT = "hibernate.dialect";
+    public static final String HIBERNATE_JAKARTA_VALIDATION_MODE = "hibernate.jakarta_validation_mode";
 }
