@@ -5,6 +5,7 @@ import org.java.dev.dto.ClientDto;
 import org.java.dev.entity.ClientEntity;
 
 import java.util.List;
+
 @NoArgsConstructor(staticName = "instance")
 public class ClientDtoMapper implements Mapper<ClientDto, ClientEntity> {
     @Override
@@ -14,6 +15,7 @@ public class ClientDtoMapper implements Mapper<ClientDto, ClientEntity> {
         target.setName(source.getName());
         return target;
     }
+
     @Override
     public List<ClientEntity> map(List<ClientDto> source) throws RuntimeException {
         return source.stream().map(this::map).toList();

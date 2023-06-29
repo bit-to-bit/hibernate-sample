@@ -15,6 +15,7 @@ public class PlanetDtoMapper implements Mapper<PlanetDto, PlanetEntity> {
         target.setName(source.getName());
         return target;
     }
+
     @Override
     public List<PlanetEntity> map(List<PlanetDto> source) throws RuntimeException {
         return source.stream().map(this::map).toList();

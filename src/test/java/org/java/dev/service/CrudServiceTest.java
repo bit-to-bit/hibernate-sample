@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-class crudServiceTest {
+class CrudServiceTest {
     protected AppProperties appProperties;
     protected ClientCrudService clientCrudService;
     protected PlanetCrudService planetCrudService;
@@ -74,8 +74,7 @@ class crudServiceTest {
 
     @Test
     void planetCrudServiceCreateDelete() {
-
-        String planetID = "TESTCREATEDELETE";
+        String planetID = "TESTCREATEDELETER";
         PlanetDto planetDto = PlanetDto.of(planetID, "CapEx 999");//planetID);
         PlanetEntity planetEntity = PlanetDtoMapper.instance().map(planetDto);
         System.out.println(" ===>>> planetDto = " + planetDto);
@@ -89,21 +88,12 @@ class crudServiceTest {
     }
 
     @Test
-    void planetCrudServiceInsert() {
+    void planetCrudServiceInsertExpectedException() {
         PlanetEntity planetEntity = new PlanetEntity();
-        planetEntity.setId("UUWWWYRRTT");
-        planetEntity.setName("URIU");
-        planetCrudService.create(planetEntity);
-        }
-    @Test
-    void planetCrudServiceDelete() {
-
-        planetCrudService.delete("UUU");
-
-
-
+        planetEntity.setId("planet777");
+        planetEntity.setName("Planet 777");
+        Assertions.assertThrows(Exception.class, () -> planetCrudService.create(planetEntity));
     }
-
 
     @Test
     void planetCrudServiceUpdate() {

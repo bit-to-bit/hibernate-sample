@@ -1,4 +1,5 @@
 package org.java.dev.configuration.hibernate;
+
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
@@ -7,15 +8,12 @@ import org.java.dev.entity.ClientEntity;
 import org.java.dev.entity.PlanetEntity;
 import org.java.dev.util.Constant;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
 @Slf4j
 public class HibernateConfiguration {
     private HibernateConfiguration() {
     }
-    public static Configuration  get(){
+
+    public static Configuration get() {
         AppProperties app = AppProperties.load();
         Configuration configuration = new Configuration();
         configuration.setProperty(AvailableSettings.DRIVER, app.getProperty(Constant.HIBERNATE_CONNECTION_DRIVER_CLASS));
@@ -24,9 +22,7 @@ public class HibernateConfiguration {
         configuration.setProperty(AvailableSettings.DIALECT, app.getProperty(Constant.HIBERNATE_DIALECT));
         configuration.setProperty(AvailableSettings.USER, app.getProperty(Constant.HIBERNATE_CONNECTION_USERNAME));
         configuration.setProperty(AvailableSettings.PASS, app.getProperty(Constant.HIBERNATE_CONNECTION_PASSWORD));
-        configuration.setProperty(AvailableSettings.DEFAULT_SCHEMA,app.getProperty(Constant.HIBERNATE_DEFAULT_SCHEMA));
-        //configuration.setProperty(AvailableSettings.JAKARTA_VALIDATION_MODE,app.getProperty(Constant.HIBERNATE_JAKARTA_VALIDATION_MODE));
-        //configuration.setProperty(AvailableSettings.JAKARTA_VALIDATION_FACTORY, "org.hibernate.validator.HibernateValidator");//""org.hibernate.validator.HibernateValidator");
+        configuration.setProperty(AvailableSettings.DEFAULT_SCHEMA, app.getProperty(Constant.HIBERNATE_DEFAULT_SCHEMA));
         configuration.addAnnotatedClass(ClientEntity.class);
         configuration.addAnnotatedClass(PlanetEntity.class);
         return configuration;

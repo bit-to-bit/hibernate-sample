@@ -2,7 +2,7 @@ package org.java.dev.service;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 import org.java.dev.configuration.hibernate.Datasource;
 import org.java.dev.entity.PlanetEntity;
 
@@ -19,7 +19,6 @@ public class PlanetCrudService {
         Session session = datasource.openSession();
         Transaction transaction = session.beginTransaction();
         String id = (String) session.save(planetEntity);
-        session.flush();
         transaction.commit();
         session.close();
         planetEntity.setId(id);
@@ -47,12 +46,13 @@ public class PlanetCrudService {
         Session session = datasource.openSession();
         Transaction transaction = session.beginTransaction();
         String queryString = "delete from PlanetEntity c where c.id=:id";
-        NativeQuery nativeQuery = session.createNativeQuery(queryString);
-        nativeQuery.setParameter("id", id);
-        int rowCount = nativeQuery.executeUpdate();
+        Query<String> query = session.createQuery(queryString);
+        query.setParameter("id", id);
+        int rowCount = query.executeUpdate();
         transaction.commit();
         session.close();
-        return rowCount;    }
+        return rowCount;
+    }
 
     public List<PlanetEntity> findAll() {
         Session session = datasource.openSession();
